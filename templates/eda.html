@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Monthly EDA Project</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js?autoload=true&skin=sunburst&lang=css"></script>
+    <style>
+      body {
+        font-family: "Lato", sans-serif;
+      }
+      .mySlides {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <title>Monthly EDA Project</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script
+    src="https://kit.fontawesome.com/a076d05399.js"
+    crossorigin="anonymous"
+  ></script>
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+    }
+    .mySlides {
+      display: none;
+    }
+  </style>
+  <body>
+    <!-- Navbar -->
+    <div class="w3-top">
+      <div class="w3-bar w3-black w3-card">
+        <a
+          class="
+            w3-bar-item
+            w3-button
+            w3-padding-large
+            w3-hide-medium
+            w3-hide-large
+            w3-right
+          "
+          href="javascript:void(0)"
+          onclick="myFunction()"
+          title="Toggle Navigation Menu"
+          ><i class="fa fa-bars"></i
+        ></a>
+        <a href="#" class="w3-bar-item w3-button w3-padding-large">EDA</a>
+        <a
+          href="#dataset"
+          class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+          >Dataset</a
+        >
+        <a
+          href="#analysis"
+          class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+          >Analysis</a
+        >
+
+        <a
+          href="javascript:void(0)"
+          class="w3-padding-large w3-hover-red w3-hide-small w3-right"
+          ><i class="fa fa-search"></i
+        ></a>
+      </div>
+    </div>
+
+    <!-- Navbar on small screens (remove the onclick attribute if you want the navbar to always show on top of the content when clicking on the links) -->
+    <div
+      id="navDemo"
+      class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top"
+      style="margin-top: 46px"
+    >
+      <a
+        href="#dataset"
+        class="w3-bar-item w3-button w3-padding-large"
+        onclick="myFunction()"
+        >Dataset</a
+      >
+      <a
+        href="#analysis"
+        class="w3-bar-item w3-button w3-padding-large"
+        onclick="myFunction()"
+        >Analysis</a
+      >
+    </div>
+
+    <!-- Page content -->
+    <div class="w3-content" style="max-width: 2000px; margin-top: 46px">
+      <!-- The Band Section -->
+      <div
+        class="w3-container w3-content w3-center w3-padding-64"
+        style="max-width: 800px"
+        id="dataset"
+      >
+        <div style="text-align: center">
+          <img src="../static/images/vaccin.png" class="w3-wide w3-center" />
+        </div>
+        <h2 class="w3-wide">COVID-19 World Vaccination Progress</h2>
+        <p class="w3-opacity">
+          <i>전세계 코로나 바이러스 백신 접종 현황을 분석해보자</i>
+        </p>
+        <a
+          href="https://www.kaggle.com/gpreda/covid-world-vaccination-progress?select=country_vaccinations.csv"
+          >Kaggle Dataset</a
+        >
+        <p class="w3-justify"></p>
+      </div>
+
+      <!-- The Tour Section -->
+      <div id="analysis">
+        <div
+          class="w3-container w3-content w3-padding-64"
+          style="max-width: 1000px"
+        >
+          <p class="w3-opacity w3-center">
+            <i>국가별 백신 접종률을 비교하기</i>
+          </p>
+          <br />
+          <h3>1. 준비 단계</h3>
+          <pre class="prettyprint">
+        import numpy as np
+        import pandas as pd
+        import seaborn as sns
+        import matplotlib.pyplot as plt
+
+        %matplotlib inline
+      </pre
+          >
+          <pre class="prettyprint">
+        df = pd.read_csv('./country_vaccinations.csv')
+      </pre
+          >
+
+          <h3>한국 백신 접종 상황</h3>
+          <pre class="prettyprint">
+        kor_df = df[df['iso_code']=='KOR']
+      </pre
+          >
+          <p></p>
+          <h5>접종 인원 추이</h5>
+          <pre class="prettyprint">
+        plt.figure(figsize=(10,5))
+        plt.style.use("ggplot")
+        sns.lineplot(x="date", y="people_vaccinated", data=kor_df)
+
+        plt.xticks([i for i in range(0, 75, 5)],rotation=45)
+        plt.xlabel("Date")
+        plt.ylabel("Vaccinated")
+
+        plt.show()
+      </pre
+          >
+          <div style="text-align: center">
+            <img src="../static/images/eda1.png" class="w3-wide w3-center" />
+          </div>
+          <h3>접종률 추이</h3>
+          <pre class="prettyprint" width="300">
+        plt.figure(figsize=(10,5))
+        plt.style.use("ggplot")
+        sns.lineplot(x="date", y="people_vaccinated_per_hundred", data=kor_df)
+
+        plt.xticks([i for i in range(0, 75, 5)],rotation=45)
+        plt.yticks([i for i in range(0, 110, 10)])
+        plt.xlabel("Date")
+        plt.ylabel("Vaccinated per hundred")
+
+        plt.show()
+      </pre
+          >
+          <div style="text-align: center">
+            <img src="../static/images/eda2.png" class="w3-wide w3-center" />
+          </div>
+
+          <h3>다른 나라와 비교</h3>
+          <pre class="prettyprint">
+ 
+        plt.figure(figsize=(10,5))
+        plt.style.use("ggplot")
+        sns.lineplot(x="date", y="people_vaccinated_per_hundred", data=us_df)
+        sns.lineplot(x="date", y="people_vaccinated_per_hundred", data=kor_df)
+        sns.lineplot(x="date", y="people_vaccinated_per_hundred", data=df[df['iso_code']=='JPN'])
+        sns.lineplot(x="date", y="people_vaccinated_per_hundred", data=df[df['iso_code']=='DEU'])
+
+        plt.xticks([i for i in range(0, 150, 5)],rotation=45)
+        plt.yticks([i for i in range(0, 110, 10)])
+        plt.xlabel("Date")
+        plt.ylabel("Vaccinated per hundred")
+        plt.title("World Vaccinated Progress ")
+
+        plt.legend(['US', 'KOR', 'JPN', 'DEU']) 
+
+        plt.show()
+      </pre
+          >
+          <div style="text-align: center">
+            <img src="../static/images/eda3.png" />
+          </div>
+
+          <h2>세계 현황</h2>
+          <p>접종률 top50</p>
+          <pre class="prettyprint">
+        x = df.groupby("country")['total_vaccinations_per_hundred'].mean().sort_values(ascending=False).head(50)
+        plt.figure(figsize=(5, 20))
+        ax = sns.barplot(x.values, x.index)
+        ax.set_ylabel("Country")
+        ax.set_xlabel("Vaccinations per hundred")
+        plt.title("World Vaccinations per hundred Rank")
+        
+        plt.show()      
+      </pre
+          >
+          <div style="text-align: center">
+            <img src="../static/images/eda4.png" />
+          </div>
+        </div>
+
+        <!-- End Page Content -->
+      </div>
+    </div>
+  </body>
+  <!-- Footer -->
+  <footer
+    class="
+      w3-container w3-padding-50 w3-center w3-opacity w3-light-grey w3-xlarge
+    "
+  >
+    <p class="w3-medium">
+      Github
+      <a
+        href="https://github.com/spongebob03/programmers_kdt_II/blob/week4/EDA/EDA%20project.ipynb"
+        target="_blank"
+        >EDA jupyternotebook</a
+      >
+    </p>
+  </footer>
+  <script>
+    // Automatic Slideshow - change image every 4 seconds
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      myIndex++;
+      if (myIndex > x.length) {
+        myIndex = 1;
+      }
+      x[myIndex - 1].style.display = "block";
+      setTimeout(carousel, 4000);
+    }
+
+    // Used to toggle the menu on small screens when clicking on the menu button
+    function myFunction() {
+      var x = document.getElementById("navDemo");
+      if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+      } else {
+        x.className = x.className.replace(" w3-show", "");
+      }
+    }
+  </script>
+</html>
